@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input,
+        button {
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        #output,
+        #newAddress,
+        #outEssay,
+        #outAnswer,
+        #bmiAnswer {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <h5>1. A delivery company in Aroje is facing complaints about incorrect package sorting due to mixed uppercase and
+        lowercase addresses. You have been employed to develop an algorithm that ensures all address labels are
+        transformed to lowercase before processing. Write a function to solve this issue.</h5>
+
+    <input type="text" name="" id="address" placeholder="Enter your address">
+    <button onclick="processAddress()">Process</button>
+    <div id="newAddress">Your new address shows here</address>
+    </div>
+
+    <hr>
+
+    <h5>2. A library at Markudi Polytechnic has a catalogue system where book titles must be unique. However, the system
+        currently does not check for duplicate titles with different letter cases (e.g., "The Great Developer" and "the
+        great developer"). As a developer, write an algorithm to detect duplicate book titles regardless of case
+        sensitivity.
+    </h5>
+
+    <input type="text" id="bookTitleInput" placeholder="Enter your book title">
+    <button onclick="addBookTitle()">Add Book Title</button>
+
+    <div id="output">Results of the duplicate check</div>
+
+    <hr>
+
+    <h5>3. A school in Ado-Ekiti found that students submit essays with multiple spaces between words, making it hard
+        for teachers to grade them. You have been hired to write an algorithm that removes extra spaces from essays
+        while keeping only one space between words.</h5>
+
+    <input type="text" name="" id="essay" placeholder="Paste your essay here">
+    <button onclick="formatedEssay()">Remove unnecessary spaces</button>
+    <div id="outEssay">Edited Essay will display here</div>
+
+
+    <hr>
+
+    <h5>7. An online quiz platform built by a level 2 student in SQI requires an algorithm to check if a student’s
+        answer matches the correct answer, regardless of the case (e.g., "ogbomoso" should match "Ogbomoso"). Write a
+        function to handle this scenario.</h5>
+
+    <span>What city did SQI started from? &nbsp;&nbsp;&nbsp; </span>
+    <input type="text" id="cityQuest" placeholder="Type your answer">
+    <button onclick="submitAnswer()">Submit</button>
+    <div id="outAnswer">Results shows here</div>
+
+    <hr>
+
+    <h5>8. SQI clinic is developing a system to calculate the Body Mass Index (BMI) of patients. You have been asked to
+        write an algorithm that takes weight (in kilograms) and height (in meters) as inputs and returns the BMI along
+        with the category: 'Underweight', 'Normal', 'Overweight', or 'Obese'.(Do further research on this)
+    </h5>
+
+    <input type="number" name="weight" id="weight" placeholder="Enter your Weight(kg)">
+    <input type="number" name="" id="height" placeholder="Enter your Height(m)">
+    <button onclick="calculateBmi()">Calculate BMI</button>
+    <div id="bmiAnswer">Your BMI results display here</div>
+
+    <h5>5. Grocery Discount</h5>
+    <p>Enter number of items in your cart:</p>
+    <input type="number" id="itemCount" min="0">
+    <button onclick="CheckDiscount()">Check</button>
+
+</body>
+
+<script>
+
+
+
+    // Question 1
+    function processAddress() {
+        if (address.value == '') {
+            alert('input can not be empty')
+        } else {
+            var letter = (address.value).toLowerCase()
+            newAddress.innerHTML = letter
+        }
+    }
+
+
+
+
+    // Question 2
+
+    const bookTitles = []; // Array to store book titles
+
+    function addBookTitle() {
+        const inputElement = document.getElementById('bookTitleInput');
+        const newTitle = inputElement.value.trim(); // Remove any leading/trailing spaces
+
+        if (newTitle === "") {
+            alert("Please enter a valid book title");
+            return;
+        }
+
+        bookTitles.push(newTitle); // Add the new title to the list of book titles
+
+        inputElement.value = ""; // Clear the input field
+
+        const duplicates = detectDuplicates(bookTitles);  // Check for duplicates
+
+
+        displayResults(duplicates);  // Display the results
+    }   // Function to add a new book title
+
+
+    function detectDuplicates(titles) {
+        const seenTitles = new Set();
+        const duplicates = [];
+
+        for (let title of titles) {
+            const normalizedTitle = title.toLowerCase();  // change to lowercase
+
+            if (seenTitles.has(normalizedTitle)) {
+                duplicates.push(title);   // If already seen, it's a duplicate
+            } else {
+                seenTitles.add(normalizedTitle);    // Add the normalized title to the set
+            }
+        }
+        return duplicates;
+    }      
+    
+    // Function to detect duplicates (case insensitive)
+
+    function displayResults(duplicates) {
+        const outputElement = document.getElementById('output');
+        if (duplicates.length > 0) {
+            outputElement.innerHTML = Duplicate.titles
+        } else {
+            outputElement.innerHTML = ("No duplicates found")
+        }
+    } 
+    // Function to display duplicate results
+    
+    
+   // Question 3
+
+    function formattedEssay() {
+        if (essay.value == "") {
+            alert('Paste your essay before clicking the button')
+        } else {
+            outEssay.innerHTML = essay.value
+            essay.value.trim();  // remove extra spacing 
+        }
+        essay.value = ""; // Clear the input field
+    }
+
+
+    // Question 7
+    function submitAnswer() {
+        var correctAns = "ogbomoso";
+
+        if (cityQuest.value == "") {
+            alert("Answer input can not be empty")
+        }
+        else if (correctAns == (cityQuest.value).toLowerCase().trim()) {
+            outAnswer.innerHTML = "Your answer is correct"
+        } else {
+            outAnswer.innerHTML = "Your answer is wrong"
+        }
+        cityQuest.value.trim();
+    }
+    // Question 8
+    function calculateBmi() {
+        let weight = document.getElementById('weight').value;
+        let height = document.getElementById('height').value;
+
+
+        if (weight.value == '' && height.value == '') {
+            alert("Input can not be empty")
+        }
+        else if (height.value == '') {
+            alert("Height input can not be empty")
+        }
+        else if (weight.value == '') {
+            alert("Weight input can not be empty")
+        }
+        else if (!isNaN(weight) && !isNaN(height)) {
+
+            let areaBodyMass = weight / height ** 2;  // area of bodymass
+
+
+            if (areaBodyMass < 18.5) {
+                bmiAnswer.innerHTML = Underweight
+            }else if (areaBodyMass <= 29.9) {
+                bmiAnswer.innerHTML = Normal
+            }else{
+                bmiAnswer.innerHTML = overweight
+            }
+        }
+    }
+
+    function CheckEvenNumber() {
+        const numItems = parseInt(document.getElementById("itemCount").value);
+        if(isNaN(numItems)) {
+            console.log('please enter items number');
+            return;
+        }
+        if (numItems=2){
+            console.log('Your item is even');
+        }
+        else if (numItems= 1){
+            console.log('You item is odd');
+        }
+        else{
+            outAnswer.innerHTML= ("your items is odd");
+        }
+    }
+</script>
+</html>
+
