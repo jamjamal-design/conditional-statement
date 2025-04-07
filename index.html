@@ -149,7 +149,7 @@
     function displayResults(duplicates) {
         const outputElement = document.getElementById('output');
         if (duplicates.length > 0) {
-            outputElement.innerHTML = Duplicate.titles
+            outputElement.innerHTML = duplicates.join(", ");
         } else {
             outputElement.innerHTML = ("No duplicates found")
         }
@@ -164,7 +164,7 @@
             alert('Paste your essay before clicking the button')
         } else {
             outEssay.innerHTML = essay.value
-            essay.value.trim();  // remove extra spacing 
+            outEssay.innerHTML = essay.value.replace(/\s+/g, ' ').trim();  // Remove extra spaces
         }
         essay.value = ""; // Clear the input field
     }
@@ -172,7 +172,7 @@
 
     // Question 7
     function submitAnswer() {
-        var correctAns = "ogbomoso";
+        var correctAns = "ogbomoso"; // Correct answer (case-insensitive)
 
         if (cityQuest.value == "") {
             alert("Answer input can not be empty")
@@ -201,15 +201,15 @@
         }
         else if (!isNaN(weight) && !isNaN(height)) {
 
-            let areaBodyMass = weight / height ** 2;  // area of bodymass
+            let areaBodyMass = weight / height ** 2;  // Body Mass Index (BMI) calculation
 
 
             if (areaBodyMass < 18.5) {
-                bmiAnswer.innerHTML = Underweight
+                bmiAnswer.innerHTML = "Underweight";
             }else if (areaBodyMass <= 29.9) {
-                bmiAnswer.innerHTML = Normal
+                bmiAnswer.innerHTML = "Normal";
             }else{
-                bmiAnswer.innerHTML = overweight
+                bmiAnswer.innerHTML = "Overweight";
             }
         }
     }
